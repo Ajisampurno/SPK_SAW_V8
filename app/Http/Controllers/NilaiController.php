@@ -6,6 +6,8 @@ use App\Models\Nilai;
 use App\Models\Jabatan;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\MappingShift;
+use App\Models\User;
 
 class NilaiController extends Controller
 {
@@ -29,18 +31,59 @@ class NilaiController extends Controller
      */
     public function create()
     {
+        $users = User::get();
         return view('input.create', [
-            'title' => 'Tambah Data Jabatan'
+            'title' => 'Tambah Data Jabatan',
+            'users' => $users
         ]);
     }
 
     public function insert(Request $request)
     {
-        $validatedData = $request->validate([
-            'nama_jabatan' => 'required|max:255',
-        ]);
+        $cuti = MappingShift::where('user_id', $request->nip)
+            ->where('status_absen', 'Cuti')
+            ->count();
 
-        Nilai::create($validatedData);
+        $alpa = MappingShift::where('user_id', $request->nip)
+            ->where('status_absen', 'Tidak Masuk')
+            ->count();
+
+        $terlambat = MappingShift::where('user_id', $request->nip)
+            ->where('telat', '>', 0) // Pastikan hanya menghitung yang bernilai lebih dari 0
+            //->sum('telat');
+            ->count();
+
+        $pulang_awal = MappingShift::where('user_id', $request->nip)
+            ->where('pulang_cepat', '>', 0) // Pastikan hanya menghitung yang bernilai lebih dari 0
+            //->sum('pulang_cepat');
+            ->count();
+
+        $izin_pulang = MappingShift::where('user_id', $request->nip)
+            ->where('status_absen', 'Izin Pulang Cepat')
+            ->count();
+
+        $izin_telat = MappingShift::where('user_id', $request->nip)
+            ->where('status_absen', 'Izin Telat')
+            ->count();
+
+        $ijin = $izin_pulang + $izin_telat;
+
+        Nilai::create([
+            'c1' => $terlambat,
+            'c2' => $pulang_awal,
+            'c3' => $alpa,
+            'c4' => $ijin,
+            'c5' => $cuti,
+            'c6' => $request->c6,
+            'c7' => $request->c7,
+            'c8' => $request->c8,
+            'c9' => $request->c9,
+            'c10' => $request->c10,
+            'c11' => $request->c11,
+            'c12' => $request->c12,
+            'c13' => $request->c13,
+            'c14' => $request->c14,
+        ]);
         return redirect('/input')->with('success', 'Data Berhasil di Tambahkan');
     }
     /**

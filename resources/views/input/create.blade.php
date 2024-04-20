@@ -7,14 +7,14 @@
                     <form method="post" action="{{ url('/input/insert') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="nama_jabatan" class="float-left">Nama Jabatan</label>
-                            <select class="form-control @error('nama_jabatan') is-invalid @enderror" id="nama_jabatan" name="nama_jabatan" autofocus>
+                            <label for="nip" class="float-left">Nama Jabatan</label>
+                            <select class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" autofocus>
                                 <option value="">Pilih Karyawan</option>
-                                <option value="Jabatan 1" {{ old('nama_jabatan') == 'Jabatan 1' ? 'selected' : '' }}>Jabatan 1</option>
-                                <option value="Jabatan 2" {{ old('nama_jabatan') == 'Jabatan 2' ? 'selected' : '' }}>Jabatan 2</option>
-                                <!-- Tambahkan opsi lainnya sesuai kebutuhan -->
+                                @foreach ($users as $user)    
+                                <option value="{{ $user->id }}" {{ old('nip') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                                @endforeach
                             </select>
-                            @error('nama_jabatan')
+                            @error('nip')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -29,7 +29,7 @@
                                     <i class="far fa-calendar-alt"></i>
                                 </span>
                                 </div>
-                                <input type="text" class="form-control float-right" id="reservation" name="periode">
+                                <input type="text" class="form-control float-right" id="reservation">
                             </div>
                         </div>
                         <br>
