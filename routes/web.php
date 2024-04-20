@@ -12,6 +12,9 @@ use App\Http\Controllers\jabatanController;
 use App\Http\Controllers\karyawanController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\RekapDataController;
+use App\Http\Controllers\KriteriaController;
+use App\Http\Controllers\NilaiController;
+use App\Http\Controllers\ReportController;
 use Carbon\Carbon;
 /*
 |--------------------------------------------------------------------------
@@ -23,7 +26,8 @@ use Carbon\Carbon;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::middleware('auth','log.activity')->group(function () {
+
+Route::middleware('auth', 'log.activity')->group(function () {
     Route::post('/logout', [authController::class, 'logout']);
     Route::put('/karyawan/proses-edit-shift/{id}', [karyawanController::class, 'prosesEditShift']);
     Route::get('/my-location', [AbsenController::class, 'myLocation']);
@@ -131,3 +135,15 @@ Route::delete('/dokumen/delete/{id}', [DokumenController::class, 'delete'])->mid
 // Route::put('/my-dokumen/edit-proses/{id}', [DokumenController::class, 'myDokumenEditProses'])->middleware('auth');
 // Route::delete('/my-dokumen/delete/{id}', [DokumenController::class, 'myDokumenDelete'])->middleware('auth');
 
+Route::get('/input', [NilaiController::class, 'index'])->middleware('admin');
+Route::get('/input/create', [NilaiController::class, 'create'])->middleware('admin');
+Route::post('/input/insert', [NilaiController::class, 'insert'])->middleware('admin');
+Route::get('/input/edit/{id}', [NilaiController::class, 'edit'])->middleware('admin');
+Route::put('/input/update/{id}', [NilaiController::class, 'update'])->middleware('admin');
+Route::delete('/input/delete/{id}', [NilaiController::class, 'delete'])->middleware('admin');
+
+Route::get('/kriteria', [KriteriaController::class, 'index'])->middleware('admin');
+
+Route::get('/report', [ReportController::class, 'index'])->middleware('admin');
+Route::get('/report2', [ReportController::class, 'index2'])->middleware('admin');
+Route::get('/report3', [ReportController::class, 'index3'])->middleware('admin');

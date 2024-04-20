@@ -105,6 +105,37 @@
             </nav>
     
             <hr style="background-color:dimgray">
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-header">SPK</li>
+                        <li class="nav-item">
+                            <a href="{{ url('/input') }}" class="nav-link {{ Request::is('input*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-solid fa-user kuning"></i>
+                                <p>
+                                    Input Nilai
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/kriteria') }}" class="nav-link {{ Request::is('kriteria*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-solid fa-database kuning"></i>
+                                <p>
+                                    Kriteria dan Bobot
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="{{ url('/report') }}" class="nav-link {{ Request::is('report*') ? 'active' : '' }}">
+                                <i class="nav-icon fa fa-solid fa-table kuning"></i>
+                                <p>
+                                    Data Report
+                                </p>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                
+            <hr style="background-color:dimgray">
         @endcan
 
         <nav class="mt-2">
