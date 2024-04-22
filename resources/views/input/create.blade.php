@@ -7,14 +7,14 @@
                     <form method="post" action="{{ url('/input/insert') }}">
                         @csrf
                         <div class="form-group">
-                            <label for="nip" class="float-left">Nama Jabatan</label>
-                            <select class="form-control @error('nip') is-invalid @enderror" id="nip" name="nip" autofocus>
+                            <label for="user_id" class="float-left">Nama Jabatan</label>
+                            <select class="form-control @error('user_id') is-invalid @enderror" id="user_id" name="user_id" autofocus>
                                 <option value="">Pilih Karyawan</option>
                                 @foreach ($users as $user)    
-                                <option value="{{ $user->id }}" {{ old('nip') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
+                                <option value="{{ $user->id }}" {{ old('user_id') == $user->id ? 'selected' : '' }}>{{ $user->name }}</option>
                                 @endforeach
                             </select>
-                            @error('nip')
+                            @error('user_id')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -29,7 +29,7 @@
                                     <i class="far fa-calendar-alt"></i>
                                 </span>
                                 </div>
-                                <input type="text" class="form-control float-right" id="reservation">
+                                <input type="text" class="form-control float-right" id="reservation" name="periode">
                             </div>
                         </div>
                         <br>

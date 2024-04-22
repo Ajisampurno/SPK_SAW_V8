@@ -18,9 +18,13 @@ class NilaiController extends Controller
      */
     public function index()
     {
+        $nilai = Nilai::select('nilais.id', 'user_id', 'name', 'periode')
+            ->join('users', 'users.id', '=', 'nilais.user_id')
+            ->get();
+
         return view('input.index', [
             'title' => 'Report',
-            'data_jabatan' => Jabatan::all()
+            'nilais' => $nilai
         ]);
     }
 
@@ -40,35 +44,37 @@ class NilaiController extends Controller
 
     public function insert(Request $request)
     {
-        $cuti = MappingShift::where('user_id', $request->nip)
+        $cuti = MappingShift::where('user_id', $request->user_id)
             ->where('status_absen', 'Cuti')
             ->count();
 
-        $alpa = MappingShift::where('user_id', $request->nip)
+        $alpa = MappingShift::where('user_id', $request->user_id)
             ->where('status_absen', 'Tidak Masuk')
             ->count();
 
-        $terlambat = MappingShift::where('user_id', $request->nip)
+        $terlambat = MappingShift::where('user_id', $request->user_id)
             ->where('telat', '>', 0) // Pastikan hanya menghitung yang bernilai lebih dari 0
             //->sum('telat');
             ->count();
 
-        $pulang_awal = MappingShift::where('user_id', $request->nip)
+        $pulang_awal = MappingShift::where('user_id', $request->user_id)
             ->where('pulang_cepat', '>', 0) // Pastikan hanya menghitung yang bernilai lebih dari 0
             //->sum('pulang_cepat');
             ->count();
 
-        $izin_pulang = MappingShift::where('user_id', $request->nip)
+        $izin_pulang = MappingShift::where('user_id', $request->user_id)
             ->where('status_absen', 'Izin Pulang Cepat')
             ->count();
 
-        $izin_telat = MappingShift::where('user_id', $request->nip)
+        $izin_telat = MappingShift::where('user_id', $request->user_id)
             ->where('status_absen', 'Izin Telat')
             ->count();
 
         $ijin = $izin_pulang + $izin_telat;
 
         Nilai::create([
+            'user_id' => $request->user_id,
+            'periode' => $request->periode,
             'c1' => $terlambat,
             'c2' => $pulang_awal,
             'c3' => $alpa,
@@ -137,6 +143,13 @@ class NilaiController extends Controller
      * @param  \App\Models\Nilai  $nilai
      * @return \Illuminate\Http\Response
      */
+    public function delete($id)
+    {
+        $nilai = Nilai::findOrFail($id);
+        $nilai->delete();
+        return redirect('/input')->with('success', 'Data Berhasil di Delete');
+    }
+
     public function destroy(Nilai $nilai)
     {
         //

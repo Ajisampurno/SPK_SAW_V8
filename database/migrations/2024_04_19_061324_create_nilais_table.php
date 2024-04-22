@@ -16,7 +16,7 @@ class CreateNilaisTable extends Migration
         Schema::create('nilais', function (Blueprint $table) {
             $table->id();
             $table->integer('user_id');
-            $table->date('periode');
+            $table->string('periode');
             $table->integer('c1');
             $table->integer('c2');
             $table->integer('c3');

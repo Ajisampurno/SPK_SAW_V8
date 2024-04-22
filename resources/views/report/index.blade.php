@@ -20,24 +20,44 @@
                             <th>No.</th>
                             <th>NIP</th>
                             <th>Nama</th>
-                            <th>Actions</th>
+                            <th>C1</th>
+                            <th>C2</th>
+                            <th>C3</th>
+                            <th>C4</th>
+                            <th>C5</th>
+                            <th>C6</th>
+                            <th>C7</th>
+                            <th>C8</th>
+                            <th>C9</th>
+                            <th>C10</th>
+                            <th>C11</th>
+                            <th>C12</th>
+                            <th>C13</th>
+                            <th>C14</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <!--@foreach ($data_jabatan as $dj)
+                        @foreach ($nilais as $nilai)
                             <tr>
                                 <td>{{ $loop->iteration }}</td>
-                                <td>{{ $dj->nama_jabatan }}</td>
-                                <td>
-                                    <a href="{{ url('/jabatan/edit/'.$dj->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-solid fa-edit"></i></a>
-                                    <form action="{{ url('/jabatan/delete/'.$dj->id) }}" method="post" class="d-inline">
-                                        @method('delete')
-                                        @csrf
-                                        <button class="btn btn-danger btn-sm btn-circle" onClick="return confirm('Are You Sure')"><i class="fa fa-solid fa-trash"></i></button>
-                                    </form>
-                                </td>
+                                <td>{{ $nilai['user_id'] }}</td>
+                                <td style="white-space: nowrap;">{{ $nilai['name'] }}</td>
+                                <td>{{ $nilai['c1'] }}</td>
+                                <td>{{ $nilai['c2'] }}</td>
+                                <td>{{ $nilai['c3'] }}</td>
+                                <td>{{ $nilai['c4'] }}</td>
+                                <td>{{ $nilai['c5'] }}</td>
+                                <td>{{ $nilai['c6'] }}</td>
+                                <td>{{ $nilai['c7'] }}</td>
+                                <td>{{ $nilai['c8'] }}</td>
+                                <td>{{ $nilai['c9'] }}</td>
+                                <td>{{ $nilai['c10'] }}</td>
+                                <td>{{ $nilai['c11'] }}</td>
+                                <td>{{ $nilai['c12'] }}</td>
+                                <td>{{ $nilai['c13'] }}</td>
+                                <td>{{ $nilai['c14'] }}</td>
                             </tr>
-                        @endforeach-->
+                        @endforeach
                     </tbody>
                 </table>
             </div>
