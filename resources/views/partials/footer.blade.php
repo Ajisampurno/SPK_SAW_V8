@@ -6,16 +6,16 @@
             {{-- Default to the left --}}
 
             <div class="float-left credits d-md-block d-lg-block d-xl-block d-none d-sm-none mb-2">
-                <strong>Copyright &copy; 2011-2023 <a href="https://shopee.co.id/jagosoftware">JAGOSOFTWARE</a>.</strong> All rights reserved.
+                <strong>Copyright &copy; 2011-2023 <a href="https://www.linkedin.com/in/aji-sampurno97/">Aji Sampurno</a>.</strong> All rights reserved.
             </div>
             <div class="credits d-sm-block d-md-none text-sm text-center mb-2">
-                <strong>Copyright &copy; 2011-2023 <a href="https://shopee.co.id/jagosoftware">JAGOSOFTWARE</a>.</strong> All rights reserved.
+                <strong>Copyright &copy; 2011-2023 <a href="https://www.linkedin.com/in/aji-sampurno97/">Aji Sampurno</a>.</strong> All rights reserved.
             </div>
             <div class="float-right credits d-md-block d-lg-block d-xl-block d-none d-sm-none mb-2">
-                Presented by <a href="https://shopee.co.id/jagosoftware">shopee.co.id/jagosoftware</a>
+                Presented by <a href="https://www.linkedin.com/in/aji-sampurno97/">Aji Sampurno</a>
             </div>
             <div class="credits d-sm-block d-md-none text-sm text-center mb-2">
-                Presented by <a href="https://shopee.co.id/jagosoftware">shopee.co.id/jagosoftware</a>
+                Presented by <a href="https://www.linkedin.com/in/aji-sampurno97/">Aji Sampurno</a>
             </div>
         </footer>
 

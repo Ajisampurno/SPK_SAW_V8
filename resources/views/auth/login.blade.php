@@ -32,12 +32,8 @@
                 <div class="col-md-6 contents">
                     <div class="row justify-content-center">
                         <div class="col-md-8">
-                            <div class="mb-4">
+                            <div class="mb-4 d-flex">
                                 <h3>Sign In</h3>
-                                <p class="mb-4">Jago Absensi - Laravel 9.
-                                    <br />Login terlebih dahulu untuk
-                                    memulai. (Shopee.co.id/JagoSoftware)
-                                </p>
                             </div>
                             <form method="POST" id="myForm" action="{{ url('/login-proses') }}" class="form-horizontal" autocomplete="off">
                                 @csrf

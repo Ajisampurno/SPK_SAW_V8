@@ -5,8 +5,8 @@
     @else
         <a href="{{ url('/absen') }}" class="brand-link">
     @endif
-        <img src="{{ url('assets/img/avatar-1.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-        <span class="brand-text font-weight-light">Jago Absensi</span>
+        <img src="{{ url('assets/img/avatar-1.png') }}" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+        <span class="brand-text font-weight-light">PT. Essa Sentosa</span>
     </a>
 
     <!-- Sidebar -->
