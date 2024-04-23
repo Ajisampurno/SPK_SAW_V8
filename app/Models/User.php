@@ -17,13 +17,13 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     public function MappingShift()
     {
         return $this->hasMany(MappingShift::class);
     }
-    
+
     public function Sip()
     {
         return $this->hasMany(Sip::class);
