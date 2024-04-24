@@ -52,7 +52,12 @@ class ReportController extends Controller
             // Perulangan untuk setiap kolom
             foreach ($kolom as $kol) {
                 // Hitung persentase untuk kolom saat ini
-                $persentase = ($dt->$kol / Nilai::max($kol)) * 100;
+                if (Nilai::max($kol) == 0) {
+                    $max = 1;
+                } else {
+                    $max = Nilai::max($kol);
+                }
+                $persentase = ($dt->$kol / $max) * 100;
 
                 // Tentukan nilai kategori berdasarkan persentase
                 if ($persentase >= 0 && $persentase <= 20) {
@@ -139,8 +144,12 @@ class ReportController extends Controller
             // Perulangan untuk setiap kolom
             foreach ($kolom as $kol) {
                 // Hitung persentase untuk kolom saat ini
-                $persentase = ($dt->$kol / Nilai::max($kol)) * 100;
-
+                if (Nilai::max($kol) == 0) {
+                    $max = 1;
+                } else {
+                    $max = Nilai::max($kol);
+                }
+                $persentase = ($dt->$kol / $max) * 100;
                 // Tentukan nilai kategori berdasarkan persentase
                 if (
                     $persentase >= 0 && $persentase <= 20
@@ -230,8 +239,12 @@ class ReportController extends Controller
             // Perulangan untuk setiap kolom
             foreach ($kolom as $kol) {
                 // Hitung persentase untuk kolom saat ini
-                $persentase = ($dt->$kol / Nilai::max($kol)) * 100;
-
+                if (Nilai::max($kol) == 0) {
+                    $max = 1;
+                } else {
+                    $max = Nilai::max($kol);
+                }
+                $persentase = ($dt->$kol / $max) * 100;
                 // Tentukan nilai kategori berdasarkan persentase
                 if (
                     $persentase >= 0 && $persentase <= 20
