@@ -11,7 +11,7 @@ class authController extends Controller
 {
     public function index()
     {
-        return view('auth.login',[
+        return view('auth.login', [
             "title" => "Log In"
         ]);
     }
@@ -45,18 +45,18 @@ class authController extends Controller
         if ($validator->fails()) {
             return redirect()->back()->withErrors($validator);
         }
-                
+
         $credentials = $request->validate([
             'username' => 'required',
-            'password' => 'required',            
+            'password' => 'required',
         ]);
-        
+
         $remember_me = $request->has('remember') ? true : false;
 
         if (Auth::attempt($credentials, $remember_me)) {
             $request->session()->regenerate();
 
-            if(auth()->user()->is_admin == "admin") {
+            if (auth()->user()->is_admin == "admin") {
                 return redirect()->intended('/dashboard');
             } else {
                 return redirect()->intended('/absen');

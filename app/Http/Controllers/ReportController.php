@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
 {
-    public function index()
+    public function getData()
     {
         // Ambil data nilai
         $data = Nilai::select(
@@ -53,11 +53,11 @@ class ReportController extends Controller
             foreach ($kolom as $kol) {
                 // Hitung persentase untuk kolom saat ini
                 if (Nilai::max($kol) == 0) {
-                    $max = 1;
+                    $persentase = 0;
                 } else {
                     $max = Nilai::max($kol);
+                    $persentase = ($dt->$kol / $max) * 100;
                 }
-                $persentase = ($dt->$kol / $max) * 100;
 
                 // Tentukan nilai kategori berdasarkan persentase
                 if ($persentase >= 0 && $persentase <= 20) {
@@ -95,9 +95,15 @@ class ReportController extends Controller
                 'c14' => $dt->c14,
             ];
         }
+        return $nilais;
+    }
+
+    public function index()
+    {
+        $data = $this->getData();
         return view('report.index', [
             'title' => 'Report',
-            'nilais' => $nilais
+            'nilais' => $data
         ]);
     }
 
@@ -145,26 +151,43 @@ class ReportController extends Controller
             foreach ($kolom as $kol) {
                 // Hitung persentase untuk kolom saat ini
                 if (Nilai::max($kol) == 0) {
-                    $max = 1;
+                    $persentase = 0;
                 } else {
                     $max = Nilai::max($kol);
+                    $persentase = ($dt->$kol / $max) * 100;
                 }
-                $persentase = ($dt->$kol / $max) * 100;
                 // Tentukan nilai kategori berdasarkan persentase
                 if (
                     $persentase >= 0 && $persentase <= 20
                 ) {
-                    ${$kol} = Nilai::min($kol) / 1;
+                    ${$kol} = 1;
                 } elseif ($persentase > 20 && $persentase <= 40) {
-                    ${$kol} = Nilai::min($kol) / 2;
+                    ${$kol} = 2;
                 } elseif ($persentase > 40 && $persentase <= 60) {
-                    ${$kol} = Nilai::min($kol) / 3;
+                    ${$kol} = 3;
                 } elseif ($persentase > 60 && $persentase <= 80) {
-                    ${$kol} = Nilai::min($kol) / 4;
+                    ${$kol} = 4;
                 } elseif ($persentase > 80 && $persentase <= 100) {
-                    ${$kol} = Nilai::min($kol) / 5;
+                    ${$kol} = 5;
                 }
             }
+
+            $data = $this->getData();
+
+            $c1_values = array_column($data, 'c1');
+            $min_c1_value = min($c1_values);
+
+            $c2_values = array_column($data, 'c2');
+            $min_c2_value = min($c2_values);
+
+            $c3_values = array_column($data, 'c3');
+            $min_c3_value = min($c3_values);
+
+            $c4_values = array_column($data, 'c4');
+            $min_c4_value = min($c4_values);
+
+            $c5_values = array_column($data, 'c5');
+            $min_c5_value = min($c5_values);
 
             // Simpan data normalisasi ke dalam array
             $normalisasi[$key] = [
@@ -172,11 +195,11 @@ class ReportController extends Controller
                 'user_id' => $dt->user_id,
                 'name' => $dt->name,
                 'periode' => $dt->periode,
-                'c1' => $c1,
-                'c2' => $c2,
-                'c3' => $c3,
-                'c4' => $c4,
-                'c5' => $c5,
+                'c1' => $min_c1_value / $c1,
+                'c2' => $min_c2_value / $c2,
+                'c3' => $min_c3_value / $c3,
+                'c4' => $min_c4_value / $c4,
+                'c5' => $min_c5_value / $c5,
                 'c6' => $dt->c6 / Nilai::max('c6'),
                 'c7' => $dt->c7 / Nilai::max('c7'),
                 'c8' => $dt->c8 / Nilai::max('c8'),
@@ -240,32 +263,49 @@ class ReportController extends Controller
             foreach ($kolom as $kol) {
                 // Hitung persentase untuk kolom saat ini
                 if (Nilai::max($kol) == 0) {
-                    $max = 1;
+                    $persentase = 0;
                 } else {
                     $max = Nilai::max($kol);
+                    $persentase = ($dt->$kol / $max) * 100;
                 }
-                $persentase = ($dt->$kol / $max) * 100;
                 // Tentukan nilai kategori berdasarkan persentase
                 if (
                     $persentase >= 0 && $persentase <= 20
                 ) {
-                    ${$kol} = Nilai::min($kol) / 1;
+                    ${$kol} = 1;
                 } elseif ($persentase > 20 && $persentase <= 40) {
-                    ${$kol} = Nilai::min($kol) / 2;
+                    ${$kol} = 2;
                 } elseif ($persentase > 40 && $persentase <= 60) {
-                    ${$kol} = Nilai::min($kol) / 3;
+                    ${$kol} = 3;
                 } elseif ($persentase > 60 && $persentase <= 80) {
-                    ${$kol} = Nilai::min($kol) / 4;
+                    ${$kol} = 4;
                 } elseif ($persentase > 80 && $persentase <= 100) {
-                    ${$kol} = Nilai::min($kol) / 5;
+                    ${$kol} = 5;
                 }
             }
 
-            $_c1 = $c1 * 0.06;
-            $_c2 = $c2 * 0.08;
-            $_c3 = $c3 * 0.08;
-            $_c4 = $c4 * 0.05;
-            $_c5 = $c5 * 0.05;
+            $data = $this->getData();
+
+            $c1_values = array_column($data, 'c1');
+            $min_c1_value = min($c1_values);
+
+            $c2_values = array_column($data, 'c2');
+            $min_c2_value = min($c2_values);
+
+            $c3_values = array_column($data, 'c3');
+            $min_c3_value = min($c3_values);
+
+            $c4_values = array_column($data, 'c4');
+            $min_c4_value = min($c4_values);
+
+            $c5_values = array_column($data, 'c5');
+            $min_c5_value = min($c5_values);
+
+            $_c1 = $min_c1_value / $c1 * 0.06;
+            $_c2 = $min_c2_value / $c2 * 0.08;
+            $_c3 = $min_c3_value / $c3 * 0.08;
+            $_c4 = $min_c4_value / $c4 * 0.05;
+            $_c5 = $min_c5_value / $c5 * 0.05;
             $_c6 = $dt->c6 / Nilai::max('c6') * 0.08;
             $_c7 = $dt->c7 / Nilai::max('c7') * 0.06;
             $_c8 = $dt->c8 / Nilai::max('c8') * 0.08;

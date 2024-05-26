@@ -2,12 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
+use App\Models\Absen;
 use App\Models\Nilai;
 use App\Models\Jabatan;
+use App\Models\MappingShift;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\MappingShift;
-use App\Models\User;
+
+use Illuminate\Support\Facades\DB;
 
 class NilaiController extends Controller
 {
@@ -72,6 +75,7 @@ class NilaiController extends Controller
 
         $ijin = $izin_pulang + $izin_telat;
 
+        // Buat rekaman Nilai
         Nilai::create([
             'user_id' => $request->user_id,
             'periode' => $request->periode,
@@ -90,6 +94,7 @@ class NilaiController extends Controller
             'c13' => $request->c13,
             'c14' => $request->c14,
         ]);
+
         return redirect('/input')->with('success', 'Data Berhasil di Tambahkan');
     }
     /**
@@ -143,12 +148,20 @@ class NilaiController extends Controller
      * @param  \App\Models\Nilai  $nilai
      * @return \Illuminate\Http\Response
      */
+
     public function delete($id)
     {
-        $nilai = Nilai::findOrFail($id);
-        $nilai->delete();
-        return redirect('/input')->with('success', 'Data Berhasil di Delete');
+        DB::transaction(function () use ($id) {
+            // Hapus semua rekaman Nilai yang sesuai dengan user_id
+            Nilai::where('user_id', $id)->delete();
+
+            // Hapus semua rekaman Absen yang sesuai dengan user_id
+            Absen::where('user_id', $id)->delete();
+        });
+
+        return redirect('/input')->with('success', 'Data Berhasil dihapus');
     }
+
 
     public function destroy(Nilai $nilai)
     {

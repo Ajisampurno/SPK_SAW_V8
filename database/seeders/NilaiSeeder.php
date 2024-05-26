@@ -17,9 +17,9 @@ class NilaiSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        for ($i = 1; $i < 200; $i++) {
+        for ($i = 1; $i < 4; $i++) {
             Nilai::create([
-                'user_id' => $i,
+                'user_id' => '81000' . $i,
                 'periode' => '04/21/2024 - 04/21/2024',
                 'c1' => $faker->numberBetween(1, 5),
                 'c2' => $faker->numberBetween(1, 5),
