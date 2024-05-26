@@ -109,6 +109,24 @@ class ReportController extends Controller
 
     public function index2()
     {
+
+        $data = $this->getData();
+
+        $c1_values = array_column($data, 'c1');
+        $min_c1_value = min($c1_values);
+
+        $c2_values = array_column($data, 'c2');
+        $min_c2_value = min($c2_values);
+
+        $c3_values = array_column($data, 'c3');
+        $min_c3_value = min($c3_values);
+
+        $c4_values = array_column($data, 'c4');
+        $min_c4_value = min($c4_values);
+
+        $c5_values = array_column($data, 'c5');
+        $min_c5_value = min($c5_values);
+
         // Ambil data nilai
         $data = Nilai::select(
             'nilais.id',
@@ -147,6 +165,7 @@ class ReportController extends Controller
 
         // Perulangan untuk setiap data
         foreach ($data as $key => $dt) {
+
             // Perulangan untuk setiap kolom
             foreach ($kolom as $kol) {
                 // Hitung persentase untuk kolom saat ini
@@ -171,23 +190,6 @@ class ReportController extends Controller
                     ${$kol} = 5;
                 }
             }
-
-            $data = $this->getData();
-
-            $c1_values = array_column($data, 'c1');
-            $min_c1_value = min($c1_values);
-
-            $c2_values = array_column($data, 'c2');
-            $min_c2_value = min($c2_values);
-
-            $c3_values = array_column($data, 'c3');
-            $min_c3_value = min($c3_values);
-
-            $c4_values = array_column($data, 'c4');
-            $min_c4_value = min($c4_values);
-
-            $c5_values = array_column($data, 'c5');
-            $min_c5_value = min($c5_values);
 
             // Simpan data normalisasi ke dalam array
             $normalisasi[$key] = [
@@ -221,6 +223,23 @@ class ReportController extends Controller
 
     public function index3()
     {
+        $data = $this->getData();
+
+        $c1_values = array_column($data, 'c1');
+        $min_c1_value = min($c1_values);
+
+        $c2_values = array_column($data, 'c2');
+        $min_c2_value = min($c2_values);
+
+        $c3_values = array_column($data, 'c3');
+        $min_c3_value = min($c3_values);
+
+        $c4_values = array_column($data, 'c4');
+        $min_c4_value = min($c4_values);
+
+        $c5_values = array_column($data, 'c5');
+        $min_c5_value = min($c5_values);
+
         // Ambil data nilai
         $data = Nilai::select(
             'nilais.id',
@@ -261,6 +280,7 @@ class ReportController extends Controller
         foreach ($data as $key => $dt) {
             // Perulangan untuk setiap kolom
             foreach ($kolom as $kol) {
+
                 // Hitung persentase untuk kolom saat ini
                 if (Nilai::max($kol) == 0) {
                     $persentase = 0;
@@ -283,23 +303,6 @@ class ReportController extends Controller
                     ${$kol} = 5;
                 }
             }
-
-            $data = $this->getData();
-
-            $c1_values = array_column($data, 'c1');
-            $min_c1_value = min($c1_values);
-
-            $c2_values = array_column($data, 'c2');
-            $min_c2_value = min($c2_values);
-
-            $c3_values = array_column($data, 'c3');
-            $min_c3_value = min($c3_values);
-
-            $c4_values = array_column($data, 'c4');
-            $min_c4_value = min($c4_values);
-
-            $c5_values = array_column($data, 'c5');
-            $min_c5_value = min($c5_values);
 
             $_c1 = $min_c1_value / $c1 * 0.06;
             $_c2 = $min_c2_value / $c2 * 0.08;
