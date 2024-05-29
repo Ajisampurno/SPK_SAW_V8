@@ -28,7 +28,7 @@
                                 <td>{{ $nilai->periode }}</td>
                                 <td>
                                     <!--<a href="{{ url('/input/edit/'.$nilai->id) }}" class="btn btn-sm btn-warning"><i class="fa fa-solid fa-edit"></i></a>-->
-                                    <form action="{{ url('/input/delete/'.$nilai->user_id) }}" method="post" class="d-inline">
+                                    <form action="{{ url('/input/delete/'.$nilai->id) }}" method="post" class="d-inline">
                                         @method('delete')
                                         @csrf
                                         <button class="btn btn-danger btn-sm btn-circle" onClick="return confirm('Are You Sure')"><i class="fa fa-solid fa-trash"></i></button>

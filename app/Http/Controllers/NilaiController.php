@@ -151,14 +151,7 @@ class NilaiController extends Controller
 
     public function delete($id)
     {
-        DB::transaction(function () use ($id) {
-            // Hapus semua rekaman Nilai yang sesuai dengan user_id
-            Nilai::where('user_id', $id)->delete();
-
-            // Hapus semua rekaman Absen yang sesuai dengan user_id
-            Absen::where('user_id', $id)->delete();
-        });
-
+        Nilai::find($id)->delete();
         return redirect('/input')->with('success', 'Data Berhasil dihapus');
     }
 

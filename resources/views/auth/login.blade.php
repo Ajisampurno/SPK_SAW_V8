@@ -39,12 +39,9 @@
                                 @csrf
                                 <div class="form-group first">
                                     <label for="username">Username</label>
-                                    <!--<input id="gmail" type="text"
+                                    <input id="gmail" type="text"
                                         class="form-control @error('username') is-invalid @enderror" name="username"
-                                        value="{{ old('username') }}" autocomplete="username" autofocus>-->
-                                        <input id="gmail" type="text"
-                                        class="form-control @error('username') is-invalid @enderror" name="username"
-                                        value="abdul" autocomplete="username" autofocus>
+                                        value="{{ old('username') }}" autocomplete="username" autofocus>
                                     @error('username')
                                     <span id="peringatan" class="invalid-feedback" role="alert" style="color:red">
                                         <strong><br><br><br>{{ $message }}</strong>
@@ -55,7 +52,7 @@
                                     <label for="password">Password</label>
                                     <input id="sandi" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        autocomplete="current-password" value="password">
+                                        autocomplete="current-password">
                                     @error('password')
                                     <span id="peringatan" class="invalid-feedback" role="alert" style="color:red">
                                         <strong><br><br><br>{{ $message }}</strong>
